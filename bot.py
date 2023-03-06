@@ -52,6 +52,7 @@ def get_cached_info(message: types.Message):
 async def process_start_command(message: types.Message):
     await message.reply(f"""Привет!
 Я чат бот. Я запоминаю твои последние {MESSAGES_HISTORY_LEN} сообщений
+
 Команды:
   /r - очистить историю сообщений
   /c - задать контекст (то что должно определять базовое поведение бота)""")
