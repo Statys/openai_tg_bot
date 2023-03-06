@@ -1,1 +1,2 @@
-docker compose -f compose up
+docker compose -f compose up --detach
+docker compose -f compose down

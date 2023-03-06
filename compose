@@ -1,5 +1,5 @@
 services:
-  web:
+  bot:
     image: statys/openai_bot:0.1
     env_file:
       - .env

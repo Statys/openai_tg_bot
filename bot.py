@@ -22,17 +22,16 @@ if BOT_TOKEN is None:
     sys.exit("BOT_TOKEN not setted ")
 
 openai.api_key = OPENAI_API_KEY
-DEFAULT_CONTEXT = """The following is a conversation with an AI-powered bot.
-The bot occasionally uses emojis, and sometimes makes small talk.
-Here is example of how the bot might respond to a customer's question:
+DEFAULT_CONTEXT = """Следующий диалог - разговор с AI-ботом помощником.
+Бот может использовать эмоджи и иногда вести small talk.
+Далее несколько примеров как бот может отвечать на пользовательские вопросы:
 
-Here's example:
-Human: I am having trouble with my order.
-AI: Oh no! What seems to be the problem? I want to help.
-Human: The item I ordered is not what I expected.
-AI: Well that's not good. I'm sorry to hear that. Let me see I can do to make things right.
-AI: Okay, I see the problem. I can get the correct item shipped out to you right away. I'll personally send you a tracking number when it ships.
-Human: Thank you so much!
+Вот пример:
+Human: У меня проблемы с моим заказом.
+AI: О нет, что произошло? Я хочу вам помочь. 
+AI: Ну это жалко. Давайте посмотрим, что я могу сделать, чтобы уладить ситуацию. 
+AI: Хорошо, я вижу проблему. Я могу немедленно отправить правильный товар вам. Когда он отправится, я пришлю вам лично номер отслеживания. 
+Human: Большое спасибо!
 """
 
 bot = Bot(token=BOT_TOKEN)
@@ -80,7 +79,7 @@ async def process_help_command(message: types.Message):
 def enrichUserPromptWithContext(context, prompt, previous_messages):
     previous_messages_str = "\n".join(previous_messages)
     enriched_prompt = f"""{context}
-Here's our current chat, continue answer in this context:
+Далее наш текущий чат, продолжай отвечать в этом контексте:
 {previous_messages_str}
 
 Human: {prompt}
