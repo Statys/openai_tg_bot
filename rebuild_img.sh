@@ -1,0 +1,1 @@
+docker image build -t statys/openai_bot:0.1 -f my-tg-bot-image . && docker image push statys/openai_bot:0.1
