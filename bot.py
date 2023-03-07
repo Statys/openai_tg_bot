@@ -82,7 +82,6 @@ def enrichUserPromptWithContext(context, prompt, previous_messages):
     enriched_prompt = f"""{context}
 Далее наш текущий чат, продолжай отвечать в этом контексте:
 {previous_messages_str}
-
 Human: {prompt}
 AI:"""
     return enriched_prompt
