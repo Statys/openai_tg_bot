@@ -82,8 +82,8 @@ def enrichUserPromptWithContext(context, prompt, previous_messages):
     enriched_prompt = f"""{context}
 Далее наш текущий чат, продолжай отвечать в этом контексте:
 {previous_messages_str}
-Human: {prompt}
-AI:"""
+user: {prompt}
+assistant:"""
     return enriched_prompt
 
 @dp.message_handler(filters.Text)
@@ -96,19 +96,20 @@ async def process_default_message(message: types.Message):
     if len(context) < 5:
         context = DEFAULT_CONTEXT
     
-    previous_messages.append("Human: " + message_text)
+    previous_messages.append({"role": "user", "content": message_text})
     promt = enrichUserPromptWithContext(message_text, previous_messages, context)
     if DEBUG == "True":
         print(cached_info)
         print(len(previous_messages))
         print(promt)
-    response = openai.Completion.create(
-        engine = OPENAI_ENGINE,
-        prompt = promt,
-        max_tokens = 1000
+    response = openai.ChatCompletion.create(
+        model = OPENAI_ENGINE,
+        #prompt = promt,
+        #max_tokens = 1000,
+        messages = previous_messages
     )
-    answer = response.choices[0].text
-    previous_messages.append("AI:" + answer)
+    answer = response.choices[0]["message"]["content"]
+    previous_messages.append({"role": "assistant", "content": answer})
     if len(answer) <= 1:
         answer = "[...hm...]"
     if len(previous_messages) > MESSAGES_HISTORY_LEN:

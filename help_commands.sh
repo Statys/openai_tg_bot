@@ -8,3 +8,5 @@ docker run -d --rm\
   containrrr/watchtower
 
 watch -n 1 docker container ps
+export OPENAI_API_KEY=<VAL> \
+export BOT_TOKEN=<VAL>
