@@ -14,6 +14,7 @@ BOT_TOKEN = os.environ.get('BOT_TOKEN', None)
 MODE = os.environ.get('MODE', 'DEV')
 MESSAGES_HISTORY_LEN = 15
 DEBUG = os.environ.get('DEBUG', 'True')
+OPENAI_ENGINE = os.environ.get('OPENAI_ENGINE', 'gpt-3.5-turbo')
 
 if OPENAI_API_KEY is None:
     sys.exit("OPENAI_API_KEY not setted ")
@@ -102,7 +103,7 @@ async def process_default_message(message: types.Message):
         print(len(previous_messages))
         print(promt)
     response = openai.Completion.create(
-        engine="text-davinci-003",
+        engine = OPENAI_ENGINE,
         prompt = promt,
         max_tokens = 1000
     )
